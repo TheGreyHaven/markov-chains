@@ -69,15 +69,21 @@ def make_text(chains):
 
     current_keys = chains.keys()
     current_key = choice(current_keys)
-    current_val = chains.get(current_key)
-    # chosen_word = choice(chain_value)
-    print current_key
-    print current_val
-        
-    #return " ".join(words)
+    words.extend(current_key)
+    current_val = chains[current_key]
+
+    while current_val is not None:
+        chosen_word = choice(current_val)
+        words.append(chosen_word)
+        current_val = chains.get((words[-2], words[-1]))
+    
+
+    
+    return " ".join(words)
 
 
-input_path = "green-eggs.txt"
+
+input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
